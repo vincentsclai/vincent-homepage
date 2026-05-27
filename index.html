@@ -559,7 +559,7 @@
 
         .bc-channels {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 12px;
             margin-bottom: 18px;
         }
@@ -588,8 +588,8 @@
         .bc-channel {
             border: 1px solid var(--line);
             background: var(--paper);
-            padding: 12px 8px;
-            min-height: 142px;
+            padding: 16px 12px;
+            min-height: 190px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -606,11 +606,11 @@
         }
 
         .bc-channel-qr {
-            width: 68px;
-            height: 68px;
+            width: 118px;
+            height: 118px;
             object-fit: contain;
             background: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .bc-channel-mark {
@@ -634,6 +634,11 @@
             color: var(--muted-light);
             font-size: 11.5px;
             line-height: 1.45;
+        }
+
+        .bc-channel-mail {
+            grid-column: 1 / -1;
+            min-height: 104px;
         }
 
         .wechat-btn {
@@ -1114,7 +1119,7 @@
                             <strong>公众号</strong>
                             <span>扫码查看文章<br>家庭风险观察</span>
                         </div>
-                        <a class="bc-channel" href="mailto:vincent.sc.lai@fwdlife.com.hk">
+                        <a class="bc-channel bc-channel-mail" href="mailto:vincent.sc.lai@fwdlife.com.hk">
                             <div class="bc-channel-mark">@</div>
                             <strong>邮箱</strong>
                             <span>vincent.sc.lai<br>@fwdlife.com.hk</span>
