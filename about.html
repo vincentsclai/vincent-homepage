@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 Vincent · Why I Do This</title>
+    <meta name="description" content="关于 Vincent：从金融行业到家庭风险规划，为什么先看现金流、责任和缓冲，再谈保险如何适配。">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --paper:#f7f2e8; --paper-soft:#fbf8f1; --ink:#191612;
+            --muted:#625d55; --muted-light:#a59b8d; --accent:#9f8350; --line:#ddd3c3;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #fbf8f1 0%, var(--paper) 46%, #f4ede2 100%);
+            color: var(--ink); line-height: 1.8; overflow-x: hidden;
+        }
+        body::before {
+            content:""; position:fixed; inset:0; pointer-events:none;
+            background-image: linear-gradient(rgba(25,22,18,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(25,22,18,.018) 1px, transparent 1px);
+            background-size:36px 36px; opacity:.38;
+        }
+        nav {
+            position: sticky; top:18px; z-index:100; width:min(1180px, calc(100% - 40px));
+            margin:18px auto 0; background:rgba(251,248,241,.88); backdrop-filter:blur(14px);
+            border:1px solid var(--line); height:76px; padding:0 18px;
+            display:flex; align-items:center; justify-content:space-between; box-shadow:0 18px 60px rgba(69,51,30,.06);
+        }
+        .nav-brand { display:flex; align-items:center; gap:13px; text-decoration:none; }
+        .nav-mono {
+            width:48px; height:48px; border:1px solid var(--line); background:var(--paper-soft);
+            color:var(--ink); display:flex; align-items:center; justify-content:center;
+            font-family:Georgia, "Times New Roman", "Songti SC", serif; font-size:20px; font-weight:700;
+        }
+        .nav-brand-text { display:flex; flex-direction:column; gap:2px; }
+        .nav-name { font-size:16px; font-weight:700; color:var(--ink); line-height:1; }
+        .nav-sub { font-size:9.5px; font-weight:600; color:var(--muted-light); letter-spacing:2px; text-transform:uppercase; }
+        .nav-links { display:flex; align-items:center; gap:30px; list-style:none; }
+        .nav-links a { color:var(--muted); text-decoration:none; font-size:13px; font-weight:600; }
+        .nav-cta { background:var(--ink); color:var(--paper-soft)!important; padding:13px 24px; }
+        section { padding:104px 6%; }
+        .sec-in { width:min(1180px,100%); margin:0 auto; }
+        .sec-label, .page-kicker {
+            color:var(--accent); font-size:12px; font-weight:700; letter-spacing:3px;
+            text-transform:uppercase; margin-bottom:22px;
+        }
+        .sec-title, h1 {
+            font-family:"Songti SC", "Noto Serif SC", STSong, SimSun, Georgia, serif;
+            font-weight:500; color:var(--ink); letter-spacing:0;
+        }
+        h1 { font-size:clamp(48px,7vw,88px); line-height:1.08; }
+        .sec-title { font-size:clamp(40px,5vw,66px); line-height:1.14; }
+        .page-hero { padding-top:92px; padding-bottom:72px; }
+        .hero-inner { width:min(980px,100%); margin:0 auto; }
+        .page-lead { max-width:760px; color:var(--muted); font-size:18px; line-height:1.95; margin-top:26px; }
+        .story-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,420px); gap:76px; align-items:start; }
+        .story-text p { font-size:16.5px; line-height:2; color:var(--muted); margin-bottom:24px; }
+        .story-img { border:1px solid var(--line); overflow:hidden; box-shadow:0 24px 80px rgba(67,48,28,.08); }
+        .story-img img { width:100%; height:100%; object-fit:cover; display:block; }
+        .facts {
+            display:grid; grid-template-columns:repeat(4,1fr); gap:40px; margin-top:72px;
+            padding-top:52px; border-top:1px solid var(--line);
+        }
+        .fact-num { font-family:Georgia, "Times New Roman", "Songti SC", serif; font-size:40px; font-weight:700; color:var(--ink); line-height:1; margin-bottom:10px; }
+        .fact-num em { color:var(--accent); font-style:normal; }
+        .fact-desc { font-size:14px; color:var(--muted); line-height:1.65; }
+        .method { background:rgba(251,248,241,.5); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+        .method-lead { max-width:760px; color:var(--muted); font-size:17px; line-height:1.95; margin-top:28px; }
+        .method-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; margin-top:54px; }
+        .method-card { border:1px solid var(--line); background:rgba(251,248,241,.68); padding:28px 24px; min-height:230px; }
+        .method-num { color:var(--accent); font-size:12px; font-weight:700; letter-spacing:1px; margin-bottom:44px; }
+        .method-card h3 { font-family:"Songti SC", STSong, serif; font-size:25px; font-weight:500; margin-bottom:14px; }
+        .method-card p { color:var(--muted); font-size:14.5px; line-height:1.8; }
+        .philosophy { background:var(--paper-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+        .phil-list { margin-top:68px; }
+        .phil-row { display:grid; grid-template-columns:180px 1fr; gap:60px; padding:48px 0; border-top:1px solid var(--line); }
+        .phil-row:last-child { border-bottom:1px solid var(--line); }
+        .phil-tag { font-size:10.5px; font-weight:700; letter-spacing:2px; color:var(--accent); padding-top:9px; }
+        .phil-text { font-family:"Songti SC", STSong, serif; font-size:clamp(20px,2.4vw,28px); color:var(--ink); line-height:1.65; }
+        .contact-grid { display:grid; grid-template-columns:minmax(0,1fr) 460px; gap:86px; margin-top:64px; align-items:start; }
+        .contact-lead { font-size:16px; color:var(--muted); line-height:1.95; margin-bottom:28px; }
+        .mini-list { display:grid; gap:11px; color:var(--muted); font-size:14px; line-height:1.7; }
+        .mini-list span { display:block; padding-left:18px; position:relative; }
+        .mini-list span::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--accent); position:absolute; left:0; top:.72em; }
+        .biz-card { background:rgba(251,248,241,.86); border:1px solid var(--line); overflow:hidden; box-shadow:0 24px 80px rgba(67,48,28,.08); }
+        .bc-top { background:var(--ink); padding:36px 32px 28px; }
+        .bc-avatar { width:64px; height:64px; border-radius:50%; overflow:hidden; margin-bottom:20px; background:rgba(255,255,255,.12); }
+        .bc-avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+        .bc-name { font-family:Georgia, "Times New Roman", serif; font-size:26px; font-weight:700; color:var(--paper-soft); margin-bottom:5px; }
+        .bc-role { font-size:12px; color:rgba(251,248,241,.58); line-height:1.6; }
+        .bc-body { padding:28px 32px 32px; }
+        .bc-row { display:flex; gap:12px; font-size:13.5px; color:var(--muted); line-height:1.6; margin-bottom:13px; }
+        .bc-sep { height:1px; background:var(--line); margin:20px 0; }
+        .bc-qr { width:128px; height:128px; background:var(--paper); border:1px solid var(--line); margin:0 auto 12px; }
+        .bc-qr img { width:100%; height:100%; object-fit:cover; display:block; }
+        .bc-wechat-id { text-align:center; font-size:12px; color:var(--muted-light); margin-bottom:18px; letter-spacing:.5px; }
+        .bc-channels { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px; }
+        .bc-channel { border:1px solid var(--line); background:var(--paper); padding:16px 12px; min-height:190px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; text-decoration:none; color:inherit; }
+        .bc-channel-qr { width:118px; height:118px; object-fit:contain; background:#fff; margin-bottom:12px; }
+        .bc-channel strong { color:var(--ink); font-size:13px; margin-bottom:5px; }
+        .bc-channel span { color:var(--muted-light); font-size:11.5px; line-height:1.45; }
+        .bc-channel-mail { grid-column:1 / -1; min-height:104px; }
+        .bc-channel-mark { width:34px; height:34px; border:1px solid var(--line); display:grid; place-items:center; color:var(--accent); font-family:Georgia, serif; font-weight:700; margin-bottom:10px; }
+        footer { background:var(--ink); padding:30px 6%; display:flex; justify-content:space-between; align-items:center; gap:28px; }
+        footer, footer a { color:rgba(251,248,241,.65); font-size:12px; text-decoration:none; }
+        .ft-note { max-width:680px; line-height:1.75; color:rgba(251,248,241,.48); }
+        .fade { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+        .fade.in { opacity:1; transform:none; }
+        @media (max-width:960px) {
+            nav { top:10px; width:calc(100% - 24px); padding:0 14px; height:68px; }
+            .nav-links li:not(:last-child) { display:none; }
+            section { padding:76px 5%; }
+            .story-grid, .contact-grid { grid-template-columns:1fr; gap:52px; }
+            .method-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .facts { grid-template-columns:repeat(2,1fr); gap:36px; }
+            .phil-row { grid-template-columns:1fr; gap:14px; }
+        }
+        @media (max-width:480px) {
+            h1 { font-size:42px; }
+            .sec-title { font-size:36px; }
+            .page-lead, .story-text p, .method-lead, .contact-lead { font-size:16px; line-height:1.92; }
+            .method-grid, .bc-channels { grid-template-columns:1fr; }
+            .method-card { min-height:auto; }
+            footer { flex-direction:column; text-align:center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <a class="nav-brand" href="index.html#home">
+        <div class="nav-mono">V</div>
+        <div class="nav-brand-text">
+            <span class="nav-name">Vincent</span>
+            <span class="nav-sub">Financial Advisor</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html#home">首页</a></li>
+        <li><a href="view.html#view">我的观点</a></li>
+        <li><a href="#about">关于我</a></li>
+        <li><a href="index.html#contact" class="nav-cta">联系我</a></li>
+    </ul>
+</nav>
+
+<section class="page-hero" id="about">
+    <div class="hero-inner">
+        <p class="page-kicker">Why I Do This</p>
+        <h1>我为什么<br>开始看家庭风险</h1>
+        <p class="page-lead">我不是一开始就决定做保险的人。过去十多年，我习惯看现金流、风险和长期结构。直到自己快要成为父亲，我才真正意识到：家庭最需要的，不只是增长，还有关键时刻能撑住的底线。</p>
+    </div>
+</section>
+
+<section class="story">
+    <div class="sec-in">
+        <div class="story-grid">
+            <div class="story-text fade">
+                <p>我是 Vincent，香港人，常驻北京，现在也是一个准奶爸。家里有三只可爱的毛孩子：两只狸花猫和一只柴犬。</p>
+                <p>我读过北京大学经济学院金融硕士，也有中央财经大学会计学学士的背景。过去十多年，我主要在投行、FA、VC 和企业战略相关工作里，看企业的现金流、风险、资产结构和长期选择。</p>
+                <p>后来我发现，很多家庭其实也在面对类似的问题：收入能不能持续、责任有没有被看见、资产是不是真的能用、遇到波动时还能不能拿得住。</p>
+                <p>保险对我来说并不是完全陌生的行业。家里几位长辈长期从事保险相关工作，算是一个很朴素的“保险世家”。但真正让我认真理解保险的，不是这个背景，而是老婆怀孕以后，我第一次把自己家的账摊开来看。</p>
+                <p>后来我认真比较过几家香港保险公司，最后选择加入 FWD 富卫。我现在更愿意做的，不是上来就推荐产品，而是先帮一个家庭把已有安排、真实担心和现金流压力看清楚。</p>
+            </div>
+            <div class="story-img fade d1">
+                <img src="about-family-pets.jpg?v=20260527-family" alt="Vincent 与家人和宠物">
+            </div>
+        </div>
+        <div class="facts">
+            <div class="fade"><div class="fact-num">10<em>+</em></div><div class="fact-desc">年金融从业经验<br>看现金流、风险和长期结构</div></div>
+            <div class="fade d1"><div class="fact-num" style="font-size:32px;">北<em>大</em></div><div class="fact-desc">经济学院金融硕士<br>中央财经大学会计学学士</div></div>
+            <div class="fade d2"><div class="fact-num" style="font-size:32px;">港<em>北</em></div><div class="fact-desc">香港人，常驻北京<br>理解两地家庭和保险语境</div></div>
+            <div class="fade d3"><div class="fact-num" style="font-size:28px;">FWD</div><div class="fact-desc">富卫保险顾问<br>家庭风险规划方向</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="sec-in">
+        <p class="sec-label">Contact</p>
+        <h2 class="sec-title">继续聊</h2>
+        <div class="contact-grid">
+            <div>
+                <p class="contact-lead">如果你想先把家庭责任、现金流、已有安排和真正担心的地方说清楚，可以从微信开始。</p>
+                <div class="mini-list"><span>家庭保障规划</span><span>保单梳理</span><span>香港保险咨询</span><span>稳健家庭资产配置思路</span></div>
+            </div>
+            <div class="biz-card fade d1">
+                <div class="bc-top">
+                    <div class="bc-avatar"><img src="vincent-avatar.jpg" alt="Vincent 头像"></div>
+                    <div class="bc-name">Vincent</div>
+                    <div class="bc-role">Financial Advisor · FWD 富卫保险顾问<br>家庭风险规划方向</div>
+                </div>
+                <div class="bc-body">
+                    <div class="bc-row"><span class="bc-icon">🎓</span><span>北京大学经济学院金融硕士 · 中央财经大学会计学学士</span></div>
+                    <div class="bc-row"><span class="bc-icon">🏠</span><span>准奶爸 · 两只狸花猫和一只柴犬</span></div>
+                    <div class="bc-sep"></div>
+                    <div class="bc-qr"><img src="wechat-qr.png" alt="Vincent 微信二维码"></div>
+                    <div class="bc-wechat-id">微信 ID：13041257727</div>
+                    <div class="bc-channels">
+                        <div class="bc-channel"><img class="bc-channel-qr" src="xhs-qr.jpg" alt="Vincent 小红书二维码"><strong>小红书</strong><span>Vincent 的风险笔记<br>小红书号：278090194</span></div>
+                        <div class="bc-channel"><img class="bc-channel-qr" src="wechat-official-qr.jpg" alt="Vincent 公众号二维码"><strong>公众号</strong><span>扫码查看文章<br>家庭风险观察</span></div>
+                        <a class="bc-channel bc-channel-mail" href="mailto:vincent.sc.lai@fwdlife.com.hk"><div class="bc-channel-mark">@</div><strong>邮箱</strong><span>vincent.sc.lai<br>@fwdlife.com.hk</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="ft-left">© 2026 Vincent · FWD 富卫保险顾问</div>
+    <div class="ft-note">本页面内容仅用于一般家庭风险沟通参考，不构成法律、税务、投资或具体保险建议。具体方案需结合个人与家庭情况进一步确认。</div>
+    <div class="ft-right"><a href="index.html#home">回到首页 ↑</a></div>
+</footer>
+
+<script>
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade').forEach(el => io.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const id = a.getAttribute('href');
+            if (id === '#') return;
+            const el = document.querySelector(id);
+            if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vincent · 我的观点</title>
+    <meta name="description" content="Vincent 关于家庭风险、流动性、保险和长期配置的基本看法，以及已发布文章入口。">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --paper:#f7f2e8; --paper-soft:#fbf8f1; --ink:#191612;
+            --muted:#625d55; --muted-light:#a59b8d; --accent:#9f8350; --line:#ddd3c3;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #fbf8f1 0%, var(--paper) 48%, #f4ede2 100%);
+            color: var(--ink); line-height: 1.75; overflow-x: hidden;
+        }
+        body::before {
+            content:""; position:fixed; inset:0; pointer-events:none;
+            background-image: linear-gradient(rgba(25,22,18,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(25,22,18,.018) 1px, transparent 1px);
+            background-size:36px 36px; opacity:.38;
+        }
+        nav {
+            position: sticky; top:18px; z-index:100; width:min(1180px, calc(100% - 40px));
+            margin:18px auto 0; background:rgba(251,248,241,.88); backdrop-filter:blur(14px);
+            border:1px solid var(--line); height:76px; padding:0 18px;
+            display:flex; align-items:center; justify-content:space-between; box-shadow:0 18px 60px rgba(69,51,30,.06);
+        }
+        .nav-brand { display:flex; align-items:center; gap:13px; text-decoration:none; }
+        .nav-mono {
+            width:48px; height:48px; border:1px solid var(--line); background:var(--paper-soft);
+            color:var(--ink); display:flex; align-items:center; justify-content:center;
+            font-family:Georgia, "Times New Roman", "Songti SC", serif; font-size:20px; font-weight:700;
+        }
+        .nav-brand-text { display:flex; flex-direction:column; gap:2px; }
+        .nav-name { font-size:16px; font-weight:700; color:var(--ink); line-height:1; }
+        .nav-sub { font-size:9.5px; font-weight:600; color:var(--muted-light); letter-spacing:2px; text-transform:uppercase; }
+        .nav-links { display:flex; align-items:center; gap:30px; list-style:none; }
+        .nav-links a { color:var(--muted); text-decoration:none; font-size:13px; font-weight:600; }
+        .nav-cta { background:var(--ink); color:var(--paper-soft)!important; padding:13px 24px; }
+        section { padding:104px 6%; }
+        .sec-in { width:min(1180px,100%); margin:0 auto; }
+        .sec-label, .page-kicker {
+            color:var(--accent); font-size:12px; font-weight:700; letter-spacing:3px;
+            text-transform:uppercase; margin-bottom:22px;
+        }
+        .sec-title, h1 {
+            font-family:"Songti SC", "Noto Serif SC", STSong, SimSun, Georgia, serif;
+            font-weight:500; color:var(--ink); letter-spacing:0;
+        }
+        h1 { font-size:clamp(48px,7vw,88px); line-height:1.08; }
+        .sec-title { font-size:clamp(40px,5vw,66px); line-height:1.14; }
+        .page-hero { padding-top:92px; padding-bottom:72px; }
+        .hero-inner { width:min(980px,100%); margin:0 auto; }
+        .page-lead { max-width:760px; color:var(--muted); font-size:18px; line-height:1.95; margin-top:26px; }
+        .philosophy { background:var(--paper-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+        .phil-list { margin-top:68px; }
+        .phil-row { display:grid; grid-template-columns:180px 1fr; gap:60px; padding:48px 0; border-top:1px solid var(--line); }
+        .phil-row:last-child { border-bottom:1px solid var(--line); }
+        .phil-tag { font-size:10.5px; font-weight:700; letter-spacing:2px; color:var(--accent); padding-top:9px; }
+        .phil-text { font-family:"Songti SC", STSong, serif; font-size:clamp(20px,2.4vw,28px); color:var(--ink); line-height:1.65; }
+        .articles { background:transparent; }
+        .art-hdr { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:28px; }
+        .art-hdr a { color:var(--muted); font-size:13px; text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:4px; }
+        .art-list { border-top:1px solid var(--line); }
+        .art-row {
+            display:grid; grid-template-columns:1fr 48px; gap:24px; align-items:center;
+            padding:38px 0; border-bottom:1px solid var(--line); text-decoration:none; color:inherit;
+        }
+        .art-meta { font-size:11.5px; color:var(--muted-light); letter-spacing:1px; margin-bottom:12px; }
+        .art-row h3 { font-family:"Songti SC", STSong, serif; font-size:25px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:11px; }
+        .art-row p { font-size:14.5px; color:var(--muted); line-height:1.75; }
+        .art-arrow { font-size:22px; color:var(--muted-light); text-align:right; }
+        footer { background:var(--ink); padding:30px 6%; display:flex; justify-content:space-between; align-items:center; gap:28px; }
+        footer, footer a { color:rgba(251,248,241,.65); font-size:12px; text-decoration:none; }
+        .ft-note { max-width:680px; line-height:1.75; color:rgba(251,248,241,.48); }
+        .fade { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+        .fade.in { opacity:1; transform:none; }
+        @media (max-width:960px) {
+            nav { top:10px; width:calc(100% - 24px); padding:0 14px; height:68px; }
+            .nav-links li:not(:last-child) { display:none; }
+            section { padding:76px 5%; }
+            .phil-row { grid-template-columns:1fr; gap:14px; }
+            footer { flex-direction:column; text-align:center; }
+        }
+        @media (max-width:480px) {
+            h1 { font-size:42px; }
+            .sec-title { font-size:36px; }
+            .page-lead { font-size:16px; line-height:1.92; }
+            .art-row { grid-template-columns:1fr 36px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <a class="nav-brand" href="index.html#home">
+        <div class="nav-mono">V</div>
+        <div class="nav-brand-text">
+            <span class="nav-name">Vincent</span>
+            <span class="nav-sub">Financial Advisor</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html#home">首页</a></li>
+        <li><a href="#view">我的观点</a></li>
+        <li><a href="about.html#about">关于我</a></li>
+        <li><a href="index.html#contact" class="nav-cta">联系我</a></li>
+    </ul>
+</nav>
+
+<section class="page-hero">
+    <div class="hero-inner">
+        <p class="page-kicker">My View</p>
+        <h1>我怎么看<br>家庭风险</h1>
+        <p class="page-lead">这些不是产品介绍，而是我判断一个家庭保障和资产安排时反复回到的几个问题：现金流能不能撑住，资产是不是真的能用，配置在波动里能不能拿得住。</p>
+    </div>
+</section>
+
+<section class="philosophy" id="view">
+    <div class="sec-in">
+        <p class="sec-label">Basic Beliefs</p>
+        <h2 class="sec-title">我的基本<br>看法</h2>
+        <div class="phil-list">
+            <div class="phil-row fade">
+                <div class="phil-tag">关于家庭风险</div>
+                <div class="phil-text">很多家庭的问题，不是赚得不够，而是没有留出真正能用的安全余量。平时看不出来，事情一来，现金流就会先说明问题。</div>
+            </div>
+            <div class="phil-row fade d1">
+                <div class="phil-tag">关于保险</div>
+                <div class="phil-text">保险不是用来赚钱的，是用来避免人生归零的。这是两件完全不同的事。</div>
+            </div>
+            <div class="phil-row fade d2">
+                <div class="phil-tag">关于流动性</div>
+                <div class="phil-text">有钱和拿得出钱，是两件事。很多家庭的问题，不是没钱，是钱都锁死了，现金流一断，整个家就转不动。</div>
+            </div>
+            <div class="phil-row fade d3">
+                <div class="phil-tag">关于长期配置</div>
+                <div class="phil-text">一个家庭真正适合的配置，可能不是收益最高的那个。而是经历回撤时，仍然拿得住、睡得着，不需要在最差的时候被迫做决定。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="articles" id="articles">
+    <div class="sec-in">
+        <div class="art-hdr">
+            <div>
+                <p class="sec-label">Articles</p>
+                <h2 class="sec-title">我在写什么</h2>
+            </div>
+            <a href="index.html#contact">公众号入口在联系区 →</a>
+        </div>
+        <div class="art-list">
+            <a class="art-row fade" href="https://mp.weixin.qq.com/s?__biz=MzY4NDMxMzU5Mg==&amp;mid=2247483705&amp;idx=1&amp;sn=89bf3f963d7cafceb8cb4ae917575ff3&amp;chksm=f2348ac8fb5ccff687dc1dd9e51728685f4115dd357442f923bc735a2d022a4120b575bbc64e" target="_blank" rel="noopener">
+                <div>
+                    <p class="art-meta">2026.05.15 &nbsp;·&nbsp; 家庭风险观察</p>
+                    <h3>老婆怀孕后，我重新算了一遍家庭账本</h3>
+                    <p>从祝福回到现实：如果一个收入断了，这个家能撑多久。</p>
+                </div>
+                <div class="art-arrow">→</div>
+            </a>
+            <a class="art-row fade d1" href="https://mp.weixin.qq.com/s?__biz=MzY4NDMxMzU5Mg==&amp;mid=2247483742&amp;idx=1&amp;sn=0abd4ed8dc6302d9392418385b8579d1&amp;chksm=f282d17ca25ceb6d1920090cab22067d9fc9c560fa3ddc68364024a2fe35ef6301b7a3aac06a" target="_blank" rel="noopener">
+                <div>
+                    <p class="art-meta">2026.05.22 &nbsp;·&nbsp; 家庭风险观察</p>
+                    <h3>很多家庭的问题，不是没钱，而是钱都"锁死"了</h3>
+                    <p>有钱和拿得出钱，是两件事。现金流一断，问题会先浮出来。</p>
+                </div>
+                <div class="art-arrow">→</div>
+            </a>
+            <a class="art-row fade d2" href="https://mp.weixin.qq.com/s?__biz=MzY4NDMxMzU5Mg==&amp;mid=2247483883&amp;idx=1&amp;sn=9a288cb3f74854534e067893078d44df&amp;chksm=f25334c752955b4a08f5a5f490b7e6598ebae898dfbd7cc9418ed86ddbb5e271343482f26e81" target="_blank" rel="noopener">
+                <div>
+                    <p class="art-meta">2026.05.24 &nbsp;·&nbsp; 长期主义理财</p>
+                    <h3>很多人以为自己在理财，其实是在高估自己的回撤承受力</h3>
+                    <p>不是只看收益和分散，也要问这笔钱在真实波动里扛不扛得住。</p>
+                </div>
+                <div class="art-arrow">→</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="ft-left">© 2026 Vincent · FWD 富卫保险顾问</div>
+    <div class="ft-note">本页面内容仅用于一般家庭风险沟通参考，不构成法律、税务、投资或具体保险建议。具体方案需结合个人与家庭情况进一步确认。</div>
+    <div class="ft-right"><a href="index.html#home">回到首页 ↑</a></div>
+</footer>
+
+<script>
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade').forEach(el => io.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const id = a.getAttribute('href');
+            if (id === '#') return;
+            const el = document.querySelector(id);
+            if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+        });
+    });
+</script>
+</body>
+</html>
